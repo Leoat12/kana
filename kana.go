@@ -135,6 +135,16 @@ func isChar(s string, rangeTable []*unicode.RangeTable) bool {
 	return true
 }
 
+func hasChar(s string, rangeTable []*unicode.RangeTable) bool {
+	runeForm := []rune(s)
+	for _, r := range runeForm {
+		if unicode.IsOneOf(rangeTable, r) {
+			return true
+		}
+	}
+	return false
+}
+
 // IsLatin returns true if the string contains only Latin characters
 func IsLatin(s string) bool {
 	return isChar(s, []*unicode.RangeTable{unicode.Latin, unicode.ASCII_Hex_Digit, unicode.White_Space, unicode.Hyphen})
@@ -158,6 +168,10 @@ func IsKatakana(s string) bool {
 // IsKanji return strue if the string contains only kanji
 func IsKanji(s string) bool {
 	return isChar(s, []*unicode.RangeTable{unicode.Ideographic})
+}
+
+func hasKanji(s string) bool {
+	return hasChar(s, []*unicode.RangeTable{unicode.Ideographic})
 }
 
 func replaceAll(haystack string, needles []string, replacements []string) (replaced string) {
