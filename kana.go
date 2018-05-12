@@ -170,7 +170,8 @@ func IsKanji(s string) bool {
 	return isChar(s, []*unicode.RangeTable{unicode.Ideographic})
 }
 
-func hasKanji(s string) bool {
+// HasKanji returns true if the string contains any kanji
+func HasKanji(s string) bool {
 	return hasChar(s, []*unicode.RangeTable{unicode.Ideographic})
 }
 
